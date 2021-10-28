@@ -78,9 +78,8 @@ typings/
 # Next.js build output
 .next
 
-# Nuxt.js build / generate output
+# Nuxt.js build
 .nuxt
-dist
 
 # Gatsby files
 .cache/
@@ -107,3 +106,6 @@ dist
 
 todo*
 tmp*
+
+dist/*
+!dist/manifest.json
