@@ -9,9 +9,9 @@ Trial of Chrome extensions
 
 1. Build this Chrome extension.
 
-```bash
-$ make lint build
-```
+   ```bash
+   $ make lint build
+   ```
 
 2. Start Chrome and open `chrome://extensions`.
 
