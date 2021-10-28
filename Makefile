@@ -10,10 +10,6 @@ docker/build: .build
 	Dockerfile
 	docker build -t $(IMAGE):latest .
 	touch .build
-docker/run: docker/build
-	if [ -z "`docker ps -a | grep $(CONTAINER)`" ]; then \
-		docker run -v `pwd`/src:/workdir/src -v `pwd`/dist:/workdir/dist -it --rm $(IMAGE):latest $(RUN_ARGS); \
-	fi
 
 lint: docker/build
 	docker run -v `pwd`/src:/workdir/src -v `pwd`/dist:/workdir/dist -it --rm $(IMAGE):latest npx eslint src
