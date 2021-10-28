@@ -17,6 +17,8 @@ docker/run: docker/build
 
 lint: docker/build
 	docker run -v `pwd`/src:/workdir/src -v `pwd`/dist:/workdir/dist -it --rm $(IMAGE):latest npx eslint . --ext .ts
+build: docker/build
+	docker run -v `pwd`/src:/workdir/src -v `pwd`/dist:/workdir/dist -it --rm $(IMAGE):latest npx tsc
 test: docker/build
 	@echo "NOT IMPLEMENTED"
 clean:
