@@ -12,17 +12,17 @@ build: .build
 	touch .build
 run: build
 	if [ -z "`docker ps -a | grep $(CONTAINER)`" ]; then \
-		docker run -v `pwd`/src:/workdir/src -it --rm $(IMAGE):latest $(RUN_ARGS); \
+		docker run -v `pwd`/src:/workdir/src -v `pwd`/dist:/workdir/dist -it --rm $(IMAGE):latest $(RUN_ARGS); \
 	fi
 run-d: build
 	if [ -z "`docker ps -a | grep $(CONTAINER)`" ]; then \
-		docker run -v `pwd`/src:/workdir/src -d -it --entrypoint /bin/bash --name $(CONTAINER) $(IMAGE):latest; \
+		docker run -v `pwd`/src:/workdir/src -v `pwd`/dist:/workdir/dist -d -it --entrypoint /bin/bash --name $(CONTAINER) $(IMAGE):latest; \
 	fi
 exec: run-d
 	docker exec -it $(CONTAINER) $(EXEC_ARGS)
 lint: build
 	if [ -z "`docker ps -a | grep $(CONTAINER)`" ]; then \
-		docker run -v `pwd`/src:/workdir/src -it --rm $(IMAGE):latest npx eslint . --ext .ts; \
+		docker run -v `pwd`/src:/workdir/src -v `pwd`/dist:/workdir/dist -it --rm $(IMAGE):latest npx eslint . --ext .ts; \
 	else \
 		docker exec -it $(CONTAINER) npx eslint . --ext .ts; \
 	fi
